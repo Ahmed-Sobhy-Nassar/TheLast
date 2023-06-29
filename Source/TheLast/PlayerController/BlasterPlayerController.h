@@ -22,13 +22,18 @@ public:
 	void SetHUDCarriedAmmo(int32 Ammo);
 	void SetHUDMatchCountdown(float CountdownTime);
 	virtual void OnPossess(APawn* InPawn) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	virtual float GetServerTime(); // Synced with server world clock
 	virtual void ReceivedPlayer() override; // Sync with server clock as soon as possible
+	void OnMatchStateSet(FName State);
+
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	void SetHUDTime();
+	void PollInit(); // Poll the Value of the cashed ones to the CharacterOverlay HUD 
 
 
 	/**
@@ -57,4 +62,19 @@ private:
 	float MatchTime = 180.f;
 	uint32 CountdownInt = 0;
 
+	UPROPERTY(ReplicatedUsing = OnRep_MatchState)
+		FName MatchState;
+
+	UFUNCTION()
+		void OnRep_MatchState();
+
+	UPROPERTY()
+		class UCharacterOverlay* CharacterOverlay;
+	bool bInitializeCharacterOverlay = false;
+
+	// Cashed value for the HUD, since they will be Invalid  at the beging because the CharcterOVerlay HUD wont be Initialized at the beginning 
+	float HUDHealth;
+	float HUDMaxHealth;
+	float HUDScore;
+	int32 HUDDefeats;
 };
