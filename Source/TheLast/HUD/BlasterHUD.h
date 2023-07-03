@@ -33,8 +33,15 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	TSubclassOf<class UUserWidget> CharacterOverlayClass;
 	UPROPERTY()
-	class UCharacterOverlay* CharacterOverlay;
-	void AddCharacterOverlay();
+	class UCharacterOverlay* CharacterOverlay; // Store the variable of your CharacterOverly from the TSubclassOf 
+	void AddCharacterOverlay(); //Handle the creation of character over a widget 
+	UPROPERTY(EditAnywhere, Category = "Announcement")
+	TSubclassOf<UUserWidget> AnnouncementClass;
+	UPROPERTY()
+	class UAnnouncement* Announcement; // Store the variable of your announcement from the TSubclassOf 
+	void AddAnnouncement(); // Handle the creation of the announcement widget 
+
+
 protected:
 	virtual void BeginPlay() override;
 	

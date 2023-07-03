@@ -21,12 +21,16 @@ public:
 	void SetHUDWeaponAmmo(int32 Ammo);
 	void SetHUDCarriedAmmo(int32 Ammo);
 	void SetHUDMatchCountdown(float CountdownTime);
+	void SetHUDAnnouncementCountdown(float CountdownTime); //{code 129}
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	virtual float GetServerTime(); // Synced with server world clock
 	virtual void ReceivedPlayer() override; // Sync with server clock as soon as possible
 	void OnMatchStateSet(FName State);
+
+	void HandleMatchHasStarted();
+
 
 
 protected:
@@ -55,12 +59,27 @@ protected:
 
 	float TimeSyncRunningTime = 0.f;
 	void CheckTimeSync(float DeltaTime);
+	 
+	// {code 129}
+	UFUNCTION(Server, Reliable)
+		void ServerCheckMatchState();
+
+	//Handled syncing time between server and clients for the match states as a warmup time match time. 
+	//it's OKAY if we do a client with RPC here because we just send it once so we can send that huge amount of data 
+	UFUNCTION(Client, Reliable)
+		void ClientJoinMidgame(FName StateOfMatch, float Warmup, float Match, float StartingTime);
+
+
 
 private:
 	UPROPERTY()
 	class ABlasterHUD* BlasterHUD;
-	float MatchTime = 180.f;
+	
 	uint32 CountdownInt = 0;
+
+	float LevelStartingTime = 0.f;
+	float MatchTime = 180.f;
+	float WarmupTime = 0.f;
 
 	UPROPERTY(ReplicatedUsing = OnRep_MatchState)
 		FName MatchState;
