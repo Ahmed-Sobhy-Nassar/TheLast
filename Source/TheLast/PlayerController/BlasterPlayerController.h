@@ -27,8 +27,9 @@ public:
 
 	virtual float GetServerTime(); // Synced with server world clock
 	virtual void ReceivedPlayer() override; // Sync with server clock as soon as possible
+	UFUNCTION()
 	void OnMatchStateSet(FName State);
-
+	UFUNCTION()
 	void HandleMatchHasStarted();
 
 
@@ -37,6 +38,7 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	void SetHUDTime();
+	UFUNCTION()
 	void PollInit(); // Poll the Value of the cashed ones to the CharacterOverlay HUD 
 
 

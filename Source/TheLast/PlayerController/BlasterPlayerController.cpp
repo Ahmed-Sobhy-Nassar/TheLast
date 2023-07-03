@@ -17,13 +17,8 @@ void ABlasterPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	BlasterHUD = Cast<ABlasterHUD>(GetHUD());
-	ServerCheckMatchState(); 
 
-//	if (BlasterHUD)
-//	{
-//		BlasterHUD->AddAnnouncement();    
-//// add the widget here not in OnMatchStateSet as if it is in prograss because this will be to early even the widget won't be created yet so add it here and hide if when the match starts
-//	 else and better to call it on ServerCheckMatchState();       
+	ServerCheckMatchState();
 }
 
 
@@ -158,6 +153,7 @@ void ABlasterPlayerController:: SetHUDAnnouncementCountdown(float CountdownTime)
 	{
 		int32 Minutes = FMath::FloorToInt(CountdownTime / 60.f);
 		int32 Seconds = CountdownTime - Minutes * 60;
+
 		FString CountdownText = FString::Printf(TEXT("%02d:%02d"), Minutes, Seconds);
 		BlasterHUD->Announcement->WarmupTime->SetText(FText::FromString(CountdownText));
 	}
@@ -165,8 +161,9 @@ void ABlasterPlayerController:: SetHUDAnnouncementCountdown(float CountdownTime)
 void ABlasterPlayerController::SetHUDTime()
 {
 	float TimeLeft = 0.f;
-	if (MatchState == MatchState::WaitingToStart) TimeLeft = WarmupTime - GetServerTime() + LevelStartingTime; // {129}
+	if (MatchState == MatchState::WaitingToStart) TimeLeft = WarmupTime - GetServerTime() + LevelStartingTime;
 	else if (MatchState == MatchState::InProgress) TimeLeft = WarmupTime + MatchTime - GetServerTime() + LevelStartingTime;
+
 	uint32 SecondsLeft = FMath::CeilToInt(TimeLeft);
 	if (CountdownInt != SecondsLeft)
 	{
@@ -221,7 +218,7 @@ void ABlasterPlayerController::CheckTimeSync(float DeltaTime)
 	}
 }
 
-void ABlasterPlayerController::ServerCheckMatchState_Implementation() // Set Warmup, Match timing etc to match the GameMode Timing on the server
+void ABlasterPlayerController::ServerCheckMatchState_Implementation()
 {
 	ABlasterGameMode* GameMode = Cast<ABlasterGameMode>(UGameplayStatics::GetGameMode(this));
 	if (GameMode)
@@ -236,13 +233,12 @@ void ABlasterPlayerController::ServerCheckMatchState_Implementation() // Set War
 
 void ABlasterPlayerController::ClientJoinMidgame_Implementation(FName StateOfMatch, float Warmup, float Match, float StartingTime)
 {
-	// Client RPC for Seting Warmup and Match timing etc to match the GameMode Timing on the server
 	WarmupTime = Warmup;
 	MatchTime = Match;
 	LevelStartingTime = StartingTime;
 	MatchState = StateOfMatch;
 	OnMatchStateSet(MatchState);
-	if (BlasterHUD && MatchState == MatchState::WaitingToStart) // Show the Announcement Widget just if in WaitingToStart (warmup Stage)
+	if (BlasterHUD && MatchState == MatchState::WaitingToStart)
 	{
 		BlasterHUD->AddAnnouncement();
 	}
