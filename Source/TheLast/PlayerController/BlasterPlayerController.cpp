@@ -146,7 +146,7 @@ void ABlasterPlayerController::SetHUDMatchCountdown(float CountdownTime)
 		FString CountdownText = FString::Printf(TEXT("%02d:%02d"), Minutes, Seconds);
 		BlasterHUD->CharacterOverlay->MatchCountdownText->SetText(FText::FromString(CountdownText));
 	}
-
+		
 }
 
 void ABlasterPlayerController:: SetHUDAnnouncementCountdown(float CountdownTime)
@@ -158,7 +158,7 @@ void ABlasterPlayerController:: SetHUDAnnouncementCountdown(float CountdownTime)
 	if (bHUDValid)
 	{
 
-		if (CountdownTime < 0.f)
+		if (CountdownTime <= 0.f)
 		{
 			BlasterHUD->CharacterOverlay->MatchCountdownText->SetText(FText()); // Hide the MatchCountdownText by setting it to an empty text
 			return;
