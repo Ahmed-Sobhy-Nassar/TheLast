@@ -38,5 +38,5 @@ void UOverheadWidget::ShowPlayerNetRole(APawn* InPawn)
 void UOverheadWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld)
 {
 	RemoveFromParent();
-	Super::OnLevelRemovedFromWorld(InLevel, InWorld);
+//	Super::OnLevelRemovedFromWorld(InLevel, InWorld);
 }
