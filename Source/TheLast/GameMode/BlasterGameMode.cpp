@@ -7,11 +7,12 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerStart.h"
 #include "TheLast/PlayerState/BlasterPlayerState.h"
+#include "TheLast/GameState/BlasterGameState.h"
 
 namespace MatchState
 {
 	const FName Cooldown = FName("Cooldown");
-}
+}	
 ABlasterGameMode::ABlasterGameMode()
 {
 	bDelayedStart = true;
@@ -42,6 +43,14 @@ void ABlasterGameMode::Tick(float DeltaTime)
 			SetMatchState(MatchState::Cooldown);
 		}
 	}
+	else if (MatchState == MatchState::Cooldown)
+	{
+		CountdownTime = CooldownTime + WarmupTime + MatchTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
+		if (CountdownTime <= 0.f)
+		{
+			RestartGame();
+		}
+	}
 	
 
 }
@@ -49,9 +58,12 @@ void ABlasterGameMode::PlayerEliminated(class ABlasterCharacter* ElimmedCharacte
 {
 	ABlasterPlayerState* AttackerPlayerState = AttackerController ? Cast <ABlasterPlayerState>(AttackerController->PlayerState) : nullptr;
 	ABlasterPlayerState* VictimPlayerState = VictimController ? Cast <ABlasterPlayerState>(VictimController->PlayerState) : nullptr;
-	if (AttackerController && AttackerController != VictimController)
+	ABlasterGameState* BlasterGameState = GetGameState<ABlasterGameState>();
+	if (AttackerController && AttackerController != VictimController && BlasterGameState)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("AddTo Score GameMode"));
 		AttackerPlayerState->AddToScore(1.f);
+		BlasterGameState->UpdateTopScore(AttackerPlayerState);
 	}
 	if (VictimController)
 	{

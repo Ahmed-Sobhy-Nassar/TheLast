@@ -16,6 +16,7 @@ void ABlasterPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 void ABlasterPlayerState::AddToScore(float ScoreValue)
 {
 	SetScore(GetScore() + ScoreValue);
+	//UE_LOG(LogTemp, Warning, TEXT())
 	Character = Character == nullptr ? Cast<ABlasterCharacter>(GetPawn()) : Character;
 	if (Character)
 	{

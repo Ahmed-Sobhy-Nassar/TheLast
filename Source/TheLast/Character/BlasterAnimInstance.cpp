@@ -73,7 +73,7 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
 
 	}
-	bUseFABRIK = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading; // lecture 118 for disabling FABRIK while reloading 
-	bUseAimOffsets = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading; // For preventing the aim offset  while reloading So that does not affect the reloading animation and the hand goes to the right position 
-	bTransformRightHand = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading; // For preventing the right hand from moving while reloading So that does not affect the reloading animation and the hand goes to the right position for now 
+	bUseFABRIK = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading; // {code 118} for disabling FABRIK while reloading  
+	bUseAimOffsets = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading && !BlasterCharacter->GetDisableGameplay(); // For preventing the aim offset  while reloading So that does not affect the reloading animation and the hand goes to the right position  {code 132}  for disabling it
+	bTransformRightHand = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading && !BlasterCharacter->GetDisableGameplay(); // For preventing the right hand from moving while reloading So that does not affect the reloading animation and the hand goes to the right position for now  {code 132}  for disabling it
 }

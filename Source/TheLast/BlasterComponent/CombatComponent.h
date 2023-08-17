@@ -23,6 +23,8 @@ public:
 	void Reload();
 	UFUNCTION(BlueprintCallable)
 		void FinishReloading();
+	void FireButtonPressed(bool bPressed);
+
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
@@ -38,7 +40,7 @@ protected:
 	UFUNCTION()
 		void OnRep_EquippedWeapon();
 
-	void FireButtonPressed(bool bPressed);
+	
 
 	void Fire();
 
@@ -121,6 +123,7 @@ private:
 	UPROPERTY(ReplicatedUsing = OnRep_CarriedAmmo)
 		int32 CarriedAmmo;
 
+
 	UFUNCTION()
 		void OnRep_CarriedAmmo();
 
@@ -128,6 +131,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		int32 StartingARAmmo = 30;
+
+	UPROPERTY(EditAnywhere)
+		int32 StartingRocketAmmo = 0;
 
 	void InitializeCarriedAmmo();
 

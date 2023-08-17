@@ -79,7 +79,6 @@ private:
 	UPROPERTY()
 		class ABlasterGameMode* BlasterGameMode;
 	uint32 CountdownInt = 0;
-
 	float LevelStartingTime = 0.f;
 	float MatchTime = 180.f;
 	float CooldownTime = 0.f;
