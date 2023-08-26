@@ -208,7 +208,7 @@ void ABlasterPlayerController::ReceivedPlayer()
 	if (IsLocalController())
 	{
 		ServerRequestServerTime(GetWorld()->GetTimeSeconds());
-	}
+	} 
 }
 void ABlasterPlayerController::CheckTimeSync(float DeltaTime)
 {
@@ -304,10 +304,12 @@ void ABlasterPlayerController::HandleCooldown()
 	BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
 	if (BlasterHUD)
 	{
+
 		BlasterHUD->CharacterOverlay->RemoveFromParent();
 		bool bHUDValid = BlasterHUD->Announcement &&
 			BlasterHUD->Announcement->AnnouncementText &&
 			BlasterHUD->Announcement->InfoText;
+				
 		if (bHUDValid)
 		{
 			BlasterHUD->Announcement->SetVisibility(ESlateVisibility::Visible); // to hide the Announcement widget when the match starts
