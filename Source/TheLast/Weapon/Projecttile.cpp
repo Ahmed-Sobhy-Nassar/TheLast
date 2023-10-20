@@ -9,6 +9,8 @@
 #include "Sound/SoundCue.h"
 #include "TheLast/TheLast.h"
 #include "TheLast/Character/BlasterCharacter.h"
+#include "TheLast/BlasterComponent/CombatComponent.h"
+
 
 
 AProjecttile::AProjecttile()
@@ -49,6 +51,7 @@ void AProjecttile::BeginPlay()
 
 void AProjecttile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	
 	Destroy();
 }
 

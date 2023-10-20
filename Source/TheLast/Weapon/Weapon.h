@@ -55,13 +55,16 @@ public:
 	*         note Add fire rate later
 	*/
 	UPROPERTY(EditAnywhere, Category = Combat)
-		float FireDelay = .15f;
+		float FireRate = .15f;
 	 
 	UPROPERTY(EditAnywhere, Category = Combat)
 		bool bAutomatic = true;
 
 	UPROPERTY(EditAnywhere)
 		class USoundCue* EquipSound;
+
+
+
 protected:
 	virtual void BeginPlay() override;
 	UFUNCTION()
@@ -130,6 +133,13 @@ private:
 	UPROPERTY(EditAnywhere)
 		EWeaponType WeaponType;
 
+
+	UPROPERTY(EditAnywhere)
+		float Range = 10.f;
+
+	UPROPERTY(EditAnywhere)
+		float Mobility = 10.f;
+
 public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE USphereComponent* GetAreaSphere() const { return AreaSphere; }
@@ -141,6 +151,10 @@ public:
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 	FORCEINLINE int32 GetAmmo() const { return Ammo; }
 	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
+	FORCEINLINE float GetRange() const { return Range; }
+	FORCEINLINE float GetMobility() const { return Mobility; }
+
+
 
 
 };

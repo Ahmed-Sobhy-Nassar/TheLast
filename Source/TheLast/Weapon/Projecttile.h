@@ -15,7 +15,8 @@ public:
 	AProjecttile();
 	virtual void Tick(float DeltaTime) override;
 	virtual void Destroyed() override;
-
+	
+	
 protected:
 
 	virtual void BeginPlay() override;
@@ -26,6 +27,8 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 		float MinimumDamage = 10;
+
+
 
 	UPROPERTY(EditAnywhere)
 		class UParticleSystem* ImpactParticles;
@@ -39,6 +42,11 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 		class UProjectileMovementComponent* ProjectileMovementComponent;
+
+	UPROPERTY(EditAnywhere)
+		float Range;
+	
+
 private:
 
 
@@ -46,6 +54,10 @@ private:
 		 UParticleSystem* Trace;
 
 	class UParticleSystemComponent* TraceComponent;
+
+	
+
+
 
 	
 
