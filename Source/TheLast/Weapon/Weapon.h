@@ -133,7 +133,6 @@ private:
 	UPROPERTY(EditAnywhere)
 		EWeaponType WeaponType;
 
-
 	UPROPERTY(EditAnywhere)
 		float Range = 10.f;
 

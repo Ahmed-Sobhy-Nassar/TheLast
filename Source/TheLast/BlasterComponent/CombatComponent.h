@@ -9,7 +9,7 @@
 #include "TheLast/BlasterTypes/CombatState.h"
 #include "CombatComponent.generated.h"
 
-#define TRACE_LENGTH 800.f // for the Future Change it to range for each weapon make it UPROPERTY and change it from the BP Class 
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class THELAST_API UCombatComponent : public UActorComponent
 {
@@ -140,6 +140,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		int32 StartingSMGAmmo = 25;
+
+	UPROPERTY(EditAnywhere)
+		int32 StartingShotgunAmmo = 48;
 
 
 	void InitializeCarriedAmmo();

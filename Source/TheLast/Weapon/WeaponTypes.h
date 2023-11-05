@@ -1,5 +1,6 @@
 #pragma once
 
+#define TRACE_LENGTH 80000.f // for the Future Change it to range for each weapon make it UPROPERTY and change it from the BP Class 
 
 UENUM(BlueprintType)
 enum class EWeaponType : uint8
@@ -8,6 +9,6 @@ enum class EWeaponType : uint8
 	EWT_RocketLauncher UMETA(DisplayName = "Rocket Launcher"),
 	EWT_Pistol UMETA(DisplayName = "Pistol"),
 	EWT_SubmachineGun UMETA(DisplayName = "Submachine Gun"),
-
+	EWT_Shotgun UMETA(DisplayName = "Shotgun"),
 	EWT_MAX UMETA(DisplayName = "DefaultMAX")
 };
