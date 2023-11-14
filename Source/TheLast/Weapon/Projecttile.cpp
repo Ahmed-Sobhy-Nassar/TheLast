@@ -7,6 +7,7 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Particles/ParticleSystem.h"
 #include "Sound/SoundCue.h"
+
 #include "TheLast/TheLast.h"
 #include "TheLast/Character/BlasterCharacter.h"
 #include "TheLast/BlasterComponent/CombatComponent.h"
@@ -26,11 +27,14 @@ AProjecttile::AProjecttile()
 	CollisionBox->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
 	CollisionBox->SetCollisionResponseToChannel(ECC_SkeletalMesh, ECollisionResponse::ECR_Block);
 
+	
+
 }
 
 void AProjecttile::BeginPlay()
 {
 	Super::BeginPlay();
+
 	if (Trace)
 	{
 		TraceComponent = UGameplayStatics::SpawnEmitterAttached(
@@ -68,6 +72,7 @@ void AProjecttile::Destroyed()
 	}
 
 }
+
 void AProjecttile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

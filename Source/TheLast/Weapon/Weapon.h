@@ -7,6 +7,7 @@
 #include "WeaponTypes.h"
 #include "Weapon.generated.h"
 
+
 UENUM(BlueprintType)
 enum class EWeaponState : uint8
 {
@@ -67,6 +68,10 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	float Damage = 10.f;
+
 	UFUNCTION()
 		virtual void OnSphereOverlap(
 			UPrimitiveComponent* OverlappedComponent,
@@ -84,8 +89,9 @@ protected:
 			int32 OtherBodyIndex
 		);
 
-
+	
 private:
+
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 		USkeletalMeshComponent* WeaponMesh;
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
@@ -108,11 +114,11 @@ private:
 	/**
 	* Zoomed FOV (filled of view ) while aiming
 	*/
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Properties")
 		float ZoomedFOV = 30.f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 		float ZoomInterpSpeed = 20.f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 		float CrosshairShootingFactor = 75.f;
 
 	UPROPERTY(EditAnywhere, ReplicatedUsing = OnRep_Ammo)
@@ -123,21 +129,23 @@ private:
 
 	void SpendRound(); 
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 		int32 MagCapacity;
 
 	UPROPERTY()
 		class ABlasterCharacter* BlasterOwnerCharacter;
 	UPROPERTY()
 		class ABlasterPlayerController* BlasterOwnerController;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 		EWeaponType WeaponType;
 
-	UPROPERTY(EditAnywhere)
+	
+	UPROPERTY(EditAnywhere, Category = Combat)
 		float Range = 10.f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 		float Mobility = 10.f;
+
 
 public:
 	void SetWeaponState(EWeaponState State);
@@ -150,8 +158,9 @@ public:
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 	FORCEINLINE int32 GetAmmo() const { return Ammo; }
 	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
-	FORCEINLINE float GetRange() const { return Range; }
-	FORCEINLINE float GetMobility() const { return Mobility; }
+	FORCEINLINE float GetWeaponDamage() const { return Damage; }
+	FORCEINLINE float GetWeaponRange() const { return Range; }
+	FORCEINLINE float GetWeaponMobility() const { return Mobility; }
 
 
 

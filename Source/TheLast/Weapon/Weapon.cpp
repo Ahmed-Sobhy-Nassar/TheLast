@@ -26,6 +26,8 @@ AWeapon::AWeapon()
 	AreaSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	PickupWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("PickupWidget"));
 	PickupWidget->SetupAttachment(RootComponent);
+	
+
 }
 void AWeapon::BeginPlay()
 {

@@ -23,24 +23,22 @@ protected:
 	void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit);
 
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Sounds")
 	class UParticleSystem* ImpactParticles;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Sounds")
 	USoundCue* HitSound;
 
-	UPROPERTY(EditAnywhere)
-	float Damage = 20.f;
 private:
 
 
 	UPROPERTY(EditAnywhere)
 		UParticleSystem* BeamParticles;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Particles")
 		UParticleSystem* MuzzleFlash;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Sounds")
 		USoundCue* FireSound;
 		
 	
@@ -52,7 +50,7 @@ private:
 		float DistanceToSphere = 800.f;
 
 		UPROPERTY(EditAnywhere, Category = "Weapon Scatter")
-		float SphereRadius = 75.f;
+		float SphereRadius = 75.f; // the accuracy of the weapon
 
 		UPROPERTY(EditAnywhere, Category = "Weapon Scatter")
 		bool bUseScatter = false;
