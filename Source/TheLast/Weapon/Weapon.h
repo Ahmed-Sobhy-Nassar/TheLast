@@ -26,6 +26,8 @@ public:
 	* Textures for the weapon crosshairs
 	*/
 
+
+
 	UPROPERTY(EditAnywhere, Category = Crosshairs)
 		class UTexture2D* CrosshairsCenter;
 
@@ -68,7 +70,8 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-
+	//UPROPERTY(EditAnywhere)
+	//float TRACE_LENGTH = 8000.f; // for the Future Change it to range for each weapon make it UPROPERTY and change it from the BP Class 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	float Damage = 10.f;
 
