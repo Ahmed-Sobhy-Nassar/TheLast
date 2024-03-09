@@ -31,6 +31,9 @@ public:
 
 	UPROPERTY(Replicated)
 		bool bDisableGameplay = false;
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void ShowSniperScopeWidget(bool bShowScope);	
 protected:
 	virtual void BeginPlay() override;
 	void MoveForward(float Value);
@@ -70,7 +73,7 @@ private:
 	UFUNCTION()
 		void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UCombatComponent* combate;
+		class UCombatComponent* Combat;
 	UFUNCTION(Server, Reliable)
 		void ServerEquipButtonPressed();
 	float AO_Yaw;
@@ -165,7 +168,7 @@ public:
 	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
 	ECombatState GetCombatState() const; //  {code 118}
 
-	FORCEINLINE UCombatComponent* GetCombat() const { return combate; }
+	FORCEINLINE UCombatComponent* GetCombat() const { return Combat; }
 	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }
 
 };
