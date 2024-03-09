@@ -47,7 +47,7 @@ private:
 */
 
 		UPROPERTY(EditAnywhere, Category = "Weapon Scatter")
-		float DistanceToSphere = 800.f; // working as weapon range for now
+		float DistanceToSphere = 800.f;
 
 		UPROPERTY(EditAnywhere, Category = "Weapon Scatter")
 		float SphereRadius = 75.f; // the accuracy of the weapon
