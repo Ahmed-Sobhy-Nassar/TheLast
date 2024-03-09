@@ -156,7 +156,7 @@ void ABlasterCharacter::Destroyed()
 }
 void ABlasterCharacter::BeginPlay()
 {
-	Super::BeginPlay();
+	Super::BeginPlay(); 
 	UpdateHUDHealth();
 	if (HasAuthority())
 	{
