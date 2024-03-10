@@ -417,19 +417,30 @@ void ABlasterCharacter::AimButtonPressed()
 {
 	if (bDisableGameplay) return;
 
+	
+	
+	if (FlipFlop == true)
+	{
+		FlipFlop = false;
+	}
+	else
+	{
+		FlipFlop = true;
+	}
+	
 	if (Combat)
 	{
-		Combat->SetAiming(true);
+		Combat->SetAiming(FlipFlop);
 	}
 }
 void ABlasterCharacter::AimButtonReleased()
 {
-	if (bDisableGameplay) return;
+	//if (bDisableGameplay) return;
 
-	if (Combat)
-	{
-		Combat->SetAiming(false);
-	}
+	//if (Combat)
+	//{
+	//	Combat->SetAiming(false);
+	//}
 }
 float ABlasterCharacter::CalculateSpeed()
 {
