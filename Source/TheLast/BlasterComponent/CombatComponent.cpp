@@ -178,6 +178,7 @@ void UCombatComponent::ServerReload_Implementation()
 	if (Character == nullptr || EquippedWeapon == nullptr) return;
 	CombatState = ECombatState::ECS_Reloading;
 	HandleReload();
+	FinishReloading();
 
 }
 
@@ -190,9 +191,10 @@ void UCombatComponent::FinishReloading()
 		UpdateAmmoValues();
 	}
 	if (bFireButtonPressed)
-	{
+	{   
 		Fire();
 	}
+	
 }
 int32 UCombatComponent::AmountToReload()
 {
@@ -230,7 +232,6 @@ void UCombatComponent::HandleReload()
 {
 	Character->PlayReloadMontage();
 }
-
 
 
 void UCombatComponent::OnRep_CombatState()

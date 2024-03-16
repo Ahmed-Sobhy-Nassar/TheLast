@@ -62,6 +62,8 @@ protected:
 	// Poll for any relelvant classes and initialize our HUD
 	void PollInit();
 private:
+
+	bool FlipFlop = false; // for aiming and not aiming toggol
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		class USpringArmComponent* CameraBoom;
 	UPROPERTY(EditAnywhere, Category = Camera, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
