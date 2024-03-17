@@ -154,6 +154,7 @@ void ABlasterCharacter::Destroyed()
 		Combat->EquippedWeapon->Destroy();
 	}
 }
+
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay(); 
